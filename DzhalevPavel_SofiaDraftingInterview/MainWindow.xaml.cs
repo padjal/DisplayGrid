@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +14,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using DzhalevPavel_SofiaDraftingInterview.Controllers;
+using Microsoft.Win32;
+using ExcelDataReader;
 
 namespace DzhalevPavel_SofiaDraftingInterview
 {
@@ -23,6 +28,11 @@ namespace DzhalevPavel_SofiaDraftingInterview
 		public MainWindow()
 		{
 			InitializeComponent();
+		}
+
+		private void OnImport(object sender, RoutedEventArgs e)
+		{
+			UsersGrid.ItemsSource = UsersController.ImportUsers();
 		}
 	}
 }
