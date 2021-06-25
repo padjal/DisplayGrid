@@ -29,11 +29,8 @@
                 Background="CornflowerBlue" Click="OnImport"
                 Width="105" HorizontalAlignment="Right"
                 Margin="5">Import</Button>
-        <ProgressBar Grid.Column ="0" Grid.Row="1" Width="400" 
-                     HorizontalAlignment="Left"
-                     Background="White"
-                     BorderThickness="0"
-                     Name="LoadingProgressBar"></ProgressBar>
-    </Grid> 
+        <TextBlock Grid.Row="1" Name="Timer"
+                   HorizontalAlignment="Left"></TextBlock>
+	</Grid> 
 
 </Window>
