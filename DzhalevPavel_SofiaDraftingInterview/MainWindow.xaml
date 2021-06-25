@@ -4,10 +4,11 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DzhalevPavel_SofiaDraftingInterview"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d"
         Title="Display Data" Height="450" Width="800" 
         FontSize="18" FontFamily="Montserrat Medium">
-    <Grid Margin="10">
+	<Grid Margin="10">
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="*"></ColumnDefinition>
 		</Grid.ColumnDefinitions>
@@ -17,12 +18,21 @@
 	        <RowDefinition Height="Auto"></RowDefinition>
 		</Grid.RowDefinitions>
 
-        <DataGrid Name="UsersGrid"
-	        Grid.Column="0" Grid.Row="0"></DataGrid>
+		<xctk:BusyIndicator Name="BusyIndicator">
+			<DataGrid Name="UsersGrid"
+			          Grid.Column="0" Grid.Row="0"
+			          ColumnWidth="Auto"></DataGrid>
+		</xctk:BusyIndicator>
+	        
         <Button Name="ImportButton" Grid.Column="0" Grid.Row="1"
                 Background="CornflowerBlue" Click="OnImport"
                 Width="105" HorizontalAlignment="Right"
                 Margin="5">Import</Button>
-	</Grid> 
+        <ProgressBar Grid.Column ="0" Grid.Row="1" Width="400" 
+                     HorizontalAlignment="Left"
+                     Background="White"
+                     BorderThickness="0"
+                     Name="LoadingProgressBar"></ProgressBar>
+    </Grid> 
 
 </Window>

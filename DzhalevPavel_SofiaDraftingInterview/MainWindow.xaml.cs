@@ -17,6 +17,8 @@ using System.Windows.Shapes;
 using DzhalevPavel_SofiaDraftingInterview.Controllers;
 using Microsoft.Win32;
 using ExcelDataReader;
+using Xceed.Wpf.Toolkit;
+using MessageBox = System.Windows.MessageBox;
 
 namespace DzhalevPavel_SofiaDraftingInterview
 {
@@ -30,9 +32,20 @@ namespace DzhalevPavel_SofiaDraftingInterview
 			InitializeComponent();
 		}
 
-		private void OnImport(object sender, RoutedEventArgs e)
+		private async void OnImport(object sender, RoutedEventArgs e)
 		{
-			UsersGrid.ItemsSource = UsersController.ImportUsers();
+
+			if (UsersController.ChooseFile(out string fileName))
+			{
+				BusyIndicator.IsBusy = true;
+				UsersGrid.ItemsSource = await Task.Run(() => UsersController.ImportUsers(fileName));
+				BusyIndicator.IsBusy = false;
+			}
+			else
+			{
+				MessageBox.Show("An error ocurred while choosing a file.");
+			}
+			
 		}
 	}
 }
