@@ -46,7 +46,6 @@ namespace DzhalevPavel_SofiaDraftingInterview
 			{
 				Stopwatch stopwatch = new Stopwatch();
 				stopwatch.Start();
-
 				BusyIndicator.IsBusy = true;
 				UsersGrid.ItemsSource = await Task.Run(() => UsersController.ImportUsers(fileName));
 				stopwatch.Stop();

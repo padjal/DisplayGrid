@@ -1,26 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Net.Sockets;
-using System.Threading.Tasks;
 using System.Windows;
-using Microsoft.Win32;
 using Excel = Microsoft.Office.Interop.Excel;
-using DataTable = System.Data.DataTable;
-using System;
-using System.Linq;
-using DocumentFormat.OpenXml;
 using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Spreadsheet;
+using Microsoft.Win32;
 
 namespace DzhalevPavel_SofiaDraftingInterview.Controllers
 {
 	static class UsersController
 	{
+		/// <summary>
+		/// Lets the user choose an excel file.
+		/// </summary>
+		/// <param name="fileName"></param>
+		/// <returns></returns>
 		public static bool ChooseFile(out string fileName)
 		{
-			var chooseFileDlog = new OpenFileDialog { Filter = "Excel files(*.xlsx;*.xls;*.xlt)|*.xlsx;*.xls;*.xlt" };
+			var chooseFileDlog = new OpenFileDialog { Filter = "Excel files(*.xlsx;*.xls)|*.xlsx;*.xls" };
 
 			if (chooseFileDlog.ShowDialog() is true)
 			{
@@ -32,6 +30,12 @@ namespace DzhalevPavel_SofiaDraftingInterview.Controllers
 			return false;
 		}
 
+		/// <summary>
+		/// The new and improved method for retrieving information from an excel file.
+		/// Implements the Open XML SDK.
+		/// </summary>
+		/// <param name="fileName"></param>
+		/// <returns></returns>
 		public static List<User> ImportUsers(string fileName)
 		{
 			List<User> users = new List<User>();
@@ -105,7 +109,12 @@ namespace DzhalevPavel_SofiaDraftingInterview.Controllers
 			return sortedUsers;
 		}
 
-
+		/// <summary>
+		/// Turns an excel row in an User object.
+		/// </summary>
+		/// <param name="document"></param>
+		/// <param name="row"></param>
+		/// <returns></returns>
 		private static User ParseUser(SpreadsheetDocument document, Row row)
 		{
 			string[] user = new string[4];
@@ -118,6 +127,13 @@ namespace DzhalevPavel_SofiaDraftingInterview.Controllers
 			return new User(user[0], user[1], user[2], user[3]);
 		}
 
+		/// <summary>
+		/// Method for getting the value from an excel cell. Turned out that it's more complicated than
+		/// simply getting the Text property:)
+		/// </summary>
+		/// <param name="document"></param>
+		/// <param name="cell"></param>
+		/// <returns></returns>
 		private static string GetCellValue(SpreadsheetDocument document, Cell cell)
 		{
 			SharedStringTablePart stringTablePart = document.WorkbookPart.SharedStringTablePart;
