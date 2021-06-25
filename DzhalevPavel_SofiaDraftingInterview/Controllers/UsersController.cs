@@ -42,12 +42,17 @@ namespace DzhalevPavel_SofiaDraftingInterview.Controllers
 
 				for (int i = 3; i < usedRange.Rows.Count; i++)
 				{
-					string name = ((Excel.Range)usedRange.Cells[i, 1]).Value.ToString();
-					string surname = ((Excel.Range)usedRange.Cells[i, 2]).Value2.ToString();
-					string location = ((Excel.Range)usedRange.Cells[i, 3]).Value2.ToString();
-					string email = ((Excel.Range)usedRange.Cells[i, 4]).Value2.ToString();
+					string name = ((Excel.Range) usedRange.Cells[i, 1]).Value.ToString();
+					string surname = ((Excel.Range) usedRange.Cells[i, 2]).Value2.ToString();
+					string location = ((Excel.Range) usedRange.Cells[i, 3]).Value2.ToString();
+					string email = ((Excel.Range) usedRange.Cells[i, 4]).Value2.ToString();
 					users.Add(new User(name, surname, location, email));
 				}
+
+				workBook.Close();
+				excel.Quit();
+
+				
 			}
 			catch (Exception e)
 			{

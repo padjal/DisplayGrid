@@ -43,7 +43,7 @@ namespace DzhalevPavel_SofiaDraftingInterview
 			}
 			else
 			{
-				MessageBox.Show("An error ocurred while choosing a file.");
+				MessageBox.Show("An error occurred while choosing a file.");
 			}
 			
 		}
